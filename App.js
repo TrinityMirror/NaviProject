@@ -1,34 +1,69 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, TextInput } from 'react-native';
+import React from 'react'
+import { View, Text, Button } from 'react-native'
 
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem
+} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-// import FirstPage from './Screens/FirstPage';
-// import SecondPage from './Screens/SecondPage';
-import FirstPage from './pages/FirstPage';
-import SecondPage from './pages/SecondPage';
-import ThirdPage from './pages/ThirdPage';
 
+function FeedScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+    </View>
+  )
+}
 
-const Stack = createNativeStackNavigator();
+function ArticleScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Article Screen</Text>
+    </View>
+  )
+}
 
-export default function App() {
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView{...props}>
+      <DrawerItemList{...props} />
+      <DrawerItem
+        label="Help"
+        onPress={() => alert('link to help')}
+      />
+    </DrawerContentScrollView>
+  )
+}
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer(){
+  return(
+    <Drawer.Navigator 
+    useLegacyImplementation
+    drawerContent={(props)=> <CustomDrawerContent{...props}/>}
+    screenOptions={{
+      drawerStyle: {
+        backgroundColor: '#FFA8A8',
+        width: 240,
+        },
+      }}
+    >
+      <Drawer.Screen name='Feed' component={FeedScreen} />
+      <Drawer.Screen name='Article' component={ArticleScreen} />
+    </Drawer.Navigator>
+  )
+}
+
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='Home'
-        screenOptions={{
-          headerStyle: { backgroundColor: 'pink' },
-          headerTintColor: '#ffff',
-          headerTitleStyle: { fontWeight: 'bold' }
-        }}
-      >
-        <Stack.Screen name='FirstPage' component={FirstPage} />
-        <Stack.Screen name='SecondPage' component={SecondPage} />
-        <Stack.Screen name='ThirdPage' component={ThirdPage} />
-      </Stack.Navigator>
+      <MyDrawer/>
     </NavigationContainer>
-
   );
 }
+
+export default App
