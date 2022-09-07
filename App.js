@@ -22,7 +22,7 @@ function SettingScreen({navigation}){
       <Text>setting!</Text>
       <Button
         onPress={()=> navigation.navigate('Home')}
-        title='Go to Homr'
+        title='Go to Home'
         />
     </View>
   )
