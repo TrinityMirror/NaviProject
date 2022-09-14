@@ -2,10 +2,18 @@ import { View, Text, Button } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 import { createDrawerNavigator} from '@react-navigation/drawer';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255,45,85)'
+  }
+}
 
 function HomeScreen({navigation}){
   return(
@@ -76,7 +84,7 @@ function MyDrawer(){
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
         <MyDrawer/>
     </NavigationContainer>
   )
