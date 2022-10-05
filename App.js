@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeSceen from './Screens/HomeSceen';
 import ProductScreen from './Screens/ProductScreen';
+import DetailScreen from './Screens/DetailScreen';
 import { SafeAreaView } from 'react-native-web';
 
 
@@ -63,6 +64,27 @@ function CustomDrawerContent(props) {
   )
 }
 
+const Stack = createNativeStackNavigator();
+function ProductStack(){
+  return(
+    <Stack.Navigator
+    screenOptions={{
+      headerStyle:{
+        backgroundColor:'#F4A5EC'
+      },
+      headerTintColor:'#ffff',
+      headerTitleStyle:{
+        fontWeight:'bold'
+      }
+    }}
+    >
+      <Stack.Screen name="Product" component={ProductScreen}/>
+      <Stack.Screen name="Detail"  component={DetailScreen}/>
+
+    </Stack.Navigator>
+  )
+}
+
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
@@ -78,7 +100,7 @@ function MyDrawer() {
       }}
     >
       <Drawer.Screen name='Home' component={HomeSceen} />
-      <Drawer.Screen name='Product' component={ProductScreen} />
+      <Drawer.Screen name='Product' component={ProductStack} />
     </Drawer.Navigator>
   )
 }
